@@ -4,8 +4,8 @@ export abstract class Base{
     @PrimaryGeneratedColumn("uuid")
     id!: string;
 
-    @DeleteDateColumn({nullable: false})
-    deletedAt!: Date;
+    @DeleteDateColumn()
+    deletedAt!: Date | null;
 
     @CreateDateColumn({nullable: false})
     createdAt!: Date;

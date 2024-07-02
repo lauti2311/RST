@@ -1,12 +1,10 @@
 import { DataSourceOptions } from "typeorm";
-import { Base } from "./entities/base";
 import * as dotenv from "dotenv";
-import { Provider } from "./entities/provider";
-import { Product } from "./entities/product";
-import { Facture } from "./entities/facture";
-import { FactureDetails } from "./entities/factureDetails";
+import path from "path";
 
 dotenv.config();
+const entitiesPath = path.join(__dirname, "entities", "*.ts"); // Ajusta la ruta según la ubicación de tus entidades
+
 
 const dbConfig: DataSourceOptions = {
     type: "mysql",
@@ -15,7 +13,7 @@ const dbConfig: DataSourceOptions = {
     username: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE,
-    entities: [Base, Provider, Product, Facture, FactureDetails],
+    entities: [entitiesPath],
     synchronize: true,
     logging: false,
 };

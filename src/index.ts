@@ -2,10 +2,14 @@ import "reflect-metadata";
 import { AppDataSource } from "./AppDataSource";
 import myMiddleware from "./middlewares/myMiddleWare";
 import express from 'express';
+import { ProvinceRoutes } from "./routes/provinceRoutes";
+import { TownRoutes } from "./routes/townRoutes";
+import { loadRoutes } from "./routes/routeLoader";
 
 const app = express();
 
-
+app.use(express.json());
+loadRoutes(app); // Llama a la función para cargar las rutas
 app.use(myMiddleware);
 
 
@@ -18,5 +22,10 @@ async function main() {
     console.error("Error initializing data source: ", err);
   }
 }
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
 
 main();

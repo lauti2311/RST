@@ -1,13 +1,13 @@
-import { GenericRepository } from "../repositories/genericRepository";
+import { BaseRepository } from "../repositories/baseRepository";
 import { Request, Response } from "express";
 import { EntityTarget, DeepPartial } from "typeorm";
 import { Base } from "../entities/base";
 
-export class GenericController<T extends Base> {
-    private repository: GenericRepository<T>;
+export class BaseController<T extends Base> {
+    private repository: BaseRepository<T>;
 
     constructor(entity: EntityTarget<T>) {
-        this.repository = new GenericRepository(entity);
+        this.repository = new BaseRepository(entity);
     }
 
     async getAll(req: Request, res: Response) {
